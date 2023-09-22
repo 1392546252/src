@@ -1,91 +1,89 @@
 <template>
   <div id="building">
     <div class="tabList">
-      <!-- <img class="taskOne" src="../assets/image/0.png" />
-      <img class="taskTwo" src="../assets/image/1.png" />
-      <img class="taskThree" src="../assets/image/2.png" />
-      <img class="taskFour" src="../assets/image/3.png" />
-      <img class="taskFive" src="../assets/image/4.png" />
-      <img class="taskSix" src="../assets/image/5.png" />
-      <img class="taskSeven" src="../assets/image/6.png" />
-      <img class="taskEight" src="../assets/image/7.png" /> -->
       <span
         @click="change(index)"
-        :class="{ active: nowIndex == index }"
-        class="tab tabLeft"
+        :class="{ active: nowIndex == index, tabRight: index <= 3 }"
+        class="tab"
         v-for="(item, index) in messionList"
         :key="index"
-        ><span> {{ item.name }}</span></span
+        ><span class="tabName"> {{ item.name }}</span></span
       >
     </div>
     <div style="margin-top: 120px" class="flex">
       <p
-        style="font-size: 24px; font-weight: bold; color: #aecbff"
+        style="font-size: 32px; font-weight: bold; color: #aecbff"
         v-for="item in taskList"
       >
         {{ item.name }}
       </p>
     </div>
-    <div style="margin-top: 60px" v-for="(item, index) in formValue">
-      <n-form ref="formRef" inline :label-width="50" :model="formValue">
-        <div class="flexGroup">
-          <h1 style="margin-right: 100px" :class="sstt[index]">
-            {{ item.groupName }}
-          </h1>
-          <n-form-item path="item.designGrade">
+    <div class="container">
+      <div
+        class="needFlex"
+        style="margin-top: 60px"
+        v-for="(item, index) in formValue"
+      >
+        <n-form ref="formRef" inline :label-width="50" :model="formValue">
+          <div class="flexGroup">
+            <h1 style="margin-right: 100px" :class="sstt[index]">
+              {{ item.groupName }}
+            </h1>
+            <n-form-item path="item.designGrade">
+              <n-input-number
+                style="width: 120px"
+                v-model:value="item.designGrade"
+                button-placement="both"
+              />
+            </n-form-item>
+          </div>
+          <n-form-item style="margin-left: 145px" path="item.exerciseGrade">
             <n-input-number
               style="width: 120px; background-color: transparent"
-              v-model:value="item.designGrade"
+              v-model:value="item.exerciseGrade"
               button-placement="both"
             />
           </n-form-item>
-        </div>
-        <n-form-item style="margin-left: 145px" path="item.exerciseGrade">
-          <n-input-number
-            style="width: 120px; background-color: transparent"
-            v-model:value="item.exerciseGrade"
-            button-placement="both"
-          />
-        </n-form-item>
-        <n-form-item style="margin-left: 240px" path="item.debugGrade">
-          <n-input-number
-            style="width: 120px; background-color: transparent"
-            v-model:value="item.debugGrade"
-            button-placement="both"
-          />
-        </n-form-item>
-        <n-form-item style="margin-left: 240px" path="item.innovativeGrade">
-          <n-input-number
-            style="width: 120px; background-color: transparent"
-            v-model:value="item.innovativeGrade"
-            button-placement="both"
-          />
-        </n-form-item>
-        <n-form-item style="margin-left: 240px" path="item.verifyGrade">
-          <n-input-number
-            style="width: 120px; background-color: transparent"
-            v-model:value="item.verifyGrade"
-            button-placement="both"
-          />
-        </n-form-item>
-        <n-form-item style="margin-left: 240px" path="item.practicalGrade">
-          <n-input-number
-            style="width: 120px"
-            v-model:value="item.practicalGrade"
-            button-placement="both"
-          />
-        </n-form-item>
-        <n-form-item style="margin-left: 60px">
-          <n-button
-            style="width: 100px; font-weight: bold"
-            color="#164694"
-            attr-type="button"
-            @click="handleValidateClick($event, item.groupName)"
-          >
-            提交
-          </n-button>
-        </n-form-item>
-      </n-form>
+          <n-form-item style="margin-left: 240px" path="item.debugGrade">
+            <n-input-number
+              style="width: 120px; background-color: transparent"
+              v-model:value="item.debugGrade"
+              button-placement="both"
+            />
+          </n-form-item>
+          <n-form-item style="margin-left: 240px" path="item.innovativeGrade">
+            <n-input-number
+              style="width: 120px; height: 50px; background-color: transparent"
+              v-model:value="item.innovativeGrade"
+              button-placement="both"
+            />
+          </n-form-item>
+          <n-form-item style="margin-left: 240px" path="item.verifyGrade">
+            <n-input-number
+              style="width: 120px; background-color: transparent"
+              v-model:value="item.verifyGrade"
+              button-placement="both"
+            />
+          </n-form-item>
+          <n-form-item style="margin-left: 240px" path="item.practicalGrade">
+            <n-input-number
+              style="width: 120px"
+              v-model:value="item.practicalGrade"
+              button-placement="both"
+            />
+          </n-form-item>
+          <n-form-item style="margin-left: 60px">
+            <n-button
+              style="width: 150px; font-weight: bold; font-size: 24px"
+              color="#164694"
+              attr-type="button"
+              @click="handleValidateClick($event, item.groupName)"
+            >
+              提交
+            </n-button>
+          </n-form-item>
+        </n-form>
+      </div>
     </div>
   </div>
 </template>
@@ -159,7 +157,7 @@ const taskList = ref([
   },
   {
     id: 5,
-    name: "课后拓展实战",
+    name: "课后拓展实践",
   },
 ]);
 const result = toRaw(adminStore);
@@ -259,24 +257,40 @@ const handleValidateClick = (e, name) => {
 };
 </script>
 
-<style scoped>
+<style lang="scss">
+.needFlex {
+  display: flex;
+  width: 100%;
+}
 .tabList {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 .tab {
-  width: 80px;
+  width: 120px;
   height: 50px;
   line-height: 50px;
-  border-radius: 10px;
   font-size: 20px;
   text-align: center;
-  background-color: #ddd;
+  position: relative;
+  left: -38px;
+  top: 40px;
+  background-color: #090750;
+  color: #fff;
+  user-select: none;
   cursor: pointer;
+  transform: skewX(-45deg);
+  .tabName {
+    transform: skewX(45deg);
+    display: inline-block;
+    font-size: 24px;
+    font-weight: bold;
+  }
 }
 .active {
-  background-color: rgb(103, 103, 103);
+  background-color: #00a2e8;
+  color: #fff;
 }
 .flex {
   padding-left: 120px;
@@ -410,7 +424,18 @@ const handleValidateClick = (e, name) => {
   }
 }
 .tabRight {
-  transform: skewX(-45deg);
-  display: inline-block;
+  transform: skewX(45deg);
+  .tabName {
+    display: inline-block;
+    transform: skewX(-45deg);
+    font-size: 24px;
+    font-weight: bold;
+  }
+}
+.n-input-wrapper {
+  background-color: rgb(6, 16, 58);
+}
+.n-input__input-el {
+  color: #fff !important;
 }
 </style>

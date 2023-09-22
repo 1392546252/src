@@ -3,7 +3,7 @@ import axios from "axios";
 
 //创建axios实例用来管理axios创建的api
    export const httpInstance = axios.create({
-    baseURL: "http://192.168.103.72:8080",//基地址 就是前面公共的url地址 就像百度的基地址是http://baidu.com
+    baseURL: "http://47.115.221.26:8080",//基地址 就是前面公共的url地址 就像百度的基地址是http://baidu.com
     timeout: 5000,//超时时间
 
 
