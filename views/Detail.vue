@@ -26,7 +26,7 @@
       >
         <n-form ref="formRef" inline :label-width="50" :model="formValue">
           <div class="flexGroup">
-            <h1 style="margin-right: 100px" :class="sstt[index]">
+            <h1 style="" :class="sstt[index]">
               {{ item.groupName }}
             </h1>
             <n-form-item path="item.designGrade">
@@ -37,42 +37,42 @@
               />
             </n-form-item>
           </div>
-          <n-form-item style="margin-left: 145px" path="item.exerciseGrade">
+          <n-form-item style="" path="item.exerciseGrade">
             <n-input-number
               style="width: 120px; background-color: transparent"
               v-model:value="item.exerciseGrade"
               button-placement="both"
             />
           </n-form-item>
-          <n-form-item style="margin-left: 240px" path="item.debugGrade">
+          <n-form-item style="" path="item.debugGrade">
             <n-input-number
               style="width: 120px; background-color: transparent"
               v-model:value="item.debugGrade"
               button-placement="both"
             />
           </n-form-item>
-          <n-form-item style="margin-left: 240px" path="item.innovativeGrade">
+          <n-form-item style="" path="item.innovativeGrade">
             <n-input-number
-              style="width: 120px; height: 50px; background-color: transparent"
+              style="width: 120px"
               v-model:value="item.innovativeGrade"
               button-placement="both"
             />
           </n-form-item>
-          <n-form-item style="margin-left: 240px" path="item.verifyGrade">
+          <n-form-item style="" path="item.verifyGrade">
             <n-input-number
-              style="width: 120px; background-color: transparent"
+              style="width: 120px"
               v-model:value="item.verifyGrade"
               button-placement="both"
             />
           </n-form-item>
-          <n-form-item style="margin-left: 240px" path="item.practicalGrade">
+          <n-form-item style="" path="item.practicalGrade">
             <n-input-number
               style="width: 120px"
               v-model:value="item.practicalGrade"
               button-placement="both"
             />
           </n-form-item>
-          <n-form-item style="margin-left: 60px">
+          <n-form-item style="">
             <n-button
               style="width: 150px; font-weight: bold; font-size: 24px"
               color="#164694"
@@ -89,16 +89,18 @@
 </template>
 
 <script setup lang="ts">
-import { defineComponent, ref, inject } from "vue";
+import { defineComponent, ref, inject, onMounted } from "vue";
 import { FormInst, useMessage } from "naive-ui";
 import pinia from "../stores/index";
 import { AdminStore } from "../stores/UserStore";
 import { toRaw } from "vue";
 import { postGroupScoreAPI } from "../api";
+import useDraw from "../util/useDraw";
 const adminStore = AdminStore(pinia);
 const nowIndex = ref(0);
 const axios = inject("axios");
 const sstt = ref(["ss1", "ss2", "ss3", "ss4", "ss5", "ss6"]);
+const { appRef, calcRate, windowDraw, unWindowDraw } = useDraw();
 
 const messionList = ref([
   {
@@ -134,6 +136,11 @@ const messionList = ref([
     name: "任务八",
   },
 ]);
+onMounted(() => {
+  // todo 屏幕适应
+  windowDraw();
+  calcRate();
+});
 const taskList = ref([
   {
     id: 0,
